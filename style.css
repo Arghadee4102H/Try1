@@ -1,0 +1,407 @@
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    background-color: #222831; /* Dark Gray/Black background */
+    color: #EEEEEE; /* Light Gray text for contrast */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding-top: 10px;
+}
+
+#app-container {
+    width: 100%;
+    max-width: 480px;
+    background-color: #393E46; /* Medium Dark Gray for app container */
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - 20px);
+    max-height: calc(100vh - 20px);
+    border: 1px solid #4A4E5A; /* Slightly lighter border for definition */
+}
+
+.page, #main-app {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Loading Overlay */
+#loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.75); /* Darker overlay */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    color: #EEEEEE;
+}
+
+.spinner {
+    border: 4px solid #555; /* Darker spinner track */
+    border-top: 4px solid #00ADB5; /* Blue accent for spinner */
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin-bottom: 10px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Auth Forms */
+.auth-form {
+    width: 100%;
+    max-width: 320px;
+    padding: 25px;
+    background-color: #2D323A; /* Slightly lighter dark gray for forms */
+    border-radius: 8px;
+    margin-top: 40px;
+    border: 1px solid #4A4E5A;
+}
+
+.auth-form h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #00ADB5; /* Blue accent */
+}
+
+.auth-form input[type="text"],
+.auth-form input[type="email"],
+.auth-form input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #555;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: #393E46; /* Dark input background */
+    color: #EEEEEE; /* Light text in input */
+}
+.auth-form input[type="text"]::placeholder,
+.auth-form input[type="email"]::placeholder,
+.auth-form input[type="password"]::placeholder {
+    color: #AAAAAA; /* Lighter placeholder text */
+}
+
+
+.auth-form button {
+    width: 100%;
+    padding: 12px;
+    background-color: #D83F31; /* Red for primary action buttons */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.auth-form button:hover {
+    background-color: #B72E21; /* Darker Red on hover */
+}
+
+.auth-form p {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 14px;
+    color: #BBBBBB; /* Lighter gray for paragraph text */
+}
+
+.auth-form a {
+    color: #00ADB5; /* Blue accent for links */
+    text-decoration: none;
+}
+.auth-form a:hover {
+    text-decoration: underline;
+}
+
+/* Main App Structure */
+#main-app {
+    padding: 0;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    background: linear-gradient(90deg, #D83F31 0%, #c4302b 50%, #222831 100%); /* Red to Dark Gray gradient */
+    color: white;
+    padding: 15px 20px;
+    text-align: center;
+    width: 100%;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.4);
+}
+header h1 {
+    font-size: 1.6em;
+    margin-bottom: 5px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+.user-info-header {
+    font-size: 0.95em;
+}
+
+#main-content {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 20px 15px; /* More vertical padding */
+    width: 100%;
+}
+
+.page-section {
+    width: 100%;
+    padding: 15px 0; /* Increased padding */
+    border-bottom: 1px solid #4A4E5A; /* Separator color */
+    margin-bottom: 20px; /* Increased margin */
+}
+.page-section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.page-section h2 {
+    color: #00ADB5; /* Blue accent for section titles */
+    margin-bottom: 20px;
+    font-size: 1.5em;
+    text-align: center;
+    border-bottom: 2px solid #D83F31; /* Red underline */
+    padding-bottom: 5px;
+    display: inline-block; /* To make border-bottom only as wide as text */
+}
+/* Center the H2 properly with inline-block */
+.page-section > h2 { display: block; text-align: center; } /* Override for direct children */
+.page-section > h2::after { /* The actual underline part */
+    content: '';
+    display: block;
+    width: 70px; /* Adjust width of underline */
+    margin: 5px auto 0;
+    height: 3px;
+    background-color: #D83F31;
+}
+
+
+/* Profile Section */
+.profile-details p {
+    margin-bottom: 12px;
+    font-size: 1.1em;
+    background-color: #2D323A; /* Darker item background */
+    padding: 12px;
+    border-radius: 5px;
+    border-left: 4px solid #00ADB5; /* Blue accent border */
+    color: #EEEEEE;
+}
+.profile-details strong {
+    color: #00CFFF; /* Brighter Blue for emphasis */
+}
+
+/* Spin Section */
+.spin-wheel-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 25px;
+}
+#spin-wheel {
+    width: 160px; /* Slightly larger */
+    height: 160px;
+    background: radial-gradient(circle, #D83F31 40%, #B72E21 100%); /* Red gradient */
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 0 20px rgba(216, 63, 49, 0.6), inset 0 0 15px rgba(255,255,255,0.2);
+    border: 3px solid #222831; /* Dark border around wheel */
+    transition: transform 0.1s ease-out;
+    user-select: none;
+}
+#spin-wheel:active { transform: scale(0.95); }
+
+.spin-info { text-align: center; margin-bottom: 20px; }
+.spin-info p { margin-bottom: 10px; font-size: 1.15em; color: #DDDDDD; }
+
+.spin-info button, #watch-ad-btn, .task-item button, #submit-referral-btn, #request-withdrawal-btn {
+    padding: 12px 25px; /* Larger padding */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.05em; /* Slightly larger font */
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+    margin-top: 8px;
+    text-transform: uppercase; /* Uppercase button text */
+    letter-spacing: 0.5px;
+}
+.spin-info button:active, #watch-ad-btn:active, .task-item button:active, #submit-referral-btn:active, #request-withdrawal-btn:active {
+    transform: scale(0.97);
+}
+
+#spin-btn { background-color: #00ADB5; } /* Blue for spin */
+#spin-btn:hover { background-color: #007A80; } /* Darker Blue */
+
+#get-spins-ad-btn { background-color: #D83F31; } /* Red for get spins ad */
+#get-spins-ad-btn:hover { background-color: #B72E21; }
+
+#watch-ad-btn { background-color: #009B77; } /* A different shade of green/teal */
+#watch-ad-btn:hover { background-color: #006A52; }
+
+button:disabled {
+    background-color: #5A6268 !important; /* Consistent disabled color */
+    cursor: not-allowed !important;
+    opacity: 0.6;
+}
+
+/* Task Section */
+#task-list .task-item {
+    background-color: #2D323A;
+    padding: 15px;
+    margin-bottom: 12px;
+    border-radius: 5px;
+    border: 1px solid #4A4E5A;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.2s;
+}
+#task-list .task-item:hover { background-color: #343A42; }
+.task-item-info h4 { margin-bottom: 5px; color: #EEEEEE; }
+.task-item-info p { font-size: 0.9em; color: #BBBBBB; }
+.task-item button { background-color: #00ADB5; padding: 8px 15px; font-size: 0.9em; }
+.task-item button:hover:not(:disabled) { background-color: #007A80; }
+.task-item button.completed { background-color: #D83F31; } /* Red for completed tasks */
+
+/* Ads Section (for points) */
+#ads-section p { text-align: center; margin-bottom: 12px; font-size: 1.1em; color: #DDDDDD;}
+
+/* Referral Section */
+.referral-info, .submit-referral {
+    background-color: #2D323A;
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    text-align: center;
+    border: 1px solid #4A4E5A;
+}
+.referral-info strong { color: #D83F31; font-size: 1.15em; } /* Red for referral code */
+.submit-referral h3 { margin-bottom: 15px; color: #00ADB5; } /* Blue accent */
+#submit-referral-code-input {
+    padding: 10px;
+    border: 1px solid #555;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    width: 100%;
+    max-width: 280px;
+    display: block;
+    margin-left:auto;
+    margin-right:auto;
+    background-color: #393E46;
+    color: #EEEEEE;
+}
+#submit-referral-btn { background-color: #00ADB5; } /* Blue for submit */
+#submit-referral-btn:hover { background-color: #007A80; }
+
+/* Withdraw Section */
+#withdraw-form .form-group { margin-bottom: 18px; }
+#withdraw-form label { display: block; margin-bottom: 8px; font-weight: bold; color: #00ADB5;} /* Blue accent */
+#withdraw-form select, #withdraw-form input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #555;
+    border-radius: 4px;
+    background-color: #393E46;
+    color: #EEEEEE;
+}
+#withdraw-form select option { background-color: #393E46; color: #EEEEEE; }
+#request-withdrawal-btn { background-color: #D83F31; } /* Red for withdrawal action */
+#request-withdrawal-btn:hover { background-color: #B72E21; }
+
+/* Bottom Navigation Bar */
+#bottom-bar {
+    display: flex;
+    justify-content: space-around;
+    background-color: #1C1F24; /* Very Dark Gray/Black */
+    padding: 10px 0;
+    width: 100%;
+    border-top: 2px solid #D83F31; /* Red top border */
+    position: sticky;
+    bottom: 0;
+    z-index: 100;
+}
+.nav-btn {
+    background: none;
+    border: none;
+    color: #AAAAAA; /* Lighter Gray for inactive icons */
+    font-size: 1.7em; /* Larger icons */
+    padding: 8px 10px;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: color 0.2s, transform 0.2s, opacity 0.2s;
+    flex-grow: 1;
+    text-align: center;
+}
+.nav-btn.active {
+    opacity: 1;
+    transform: translateY(-3px) scale(1.1); /* Slight lift and scale effect */
+    color: #00ADB5; /* Blue accent for active icon */
+}
+.nav-btn:hover:not(.active) {
+    color: #EEEEEE; /* White on hover for inactive */
+    opacity: 1;
+}
+
+/* Messages */
+.message {
+    margin-top: 15px;
+    padding: 12px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 1em;
+    line-height: 1.5;
+    border-width: 1px;
+    border-style: solid;
+}
+.message.success {
+    background-color: rgba(0, 173, 181, 0.15); /* Light Blue transparent */
+    color: #00ADB5; /* Blue text */
+    border-color: #00ADB5;
+}
+.message.error {
+    background-color: rgba(216, 63, 49, 0.15); /* Light Red transparent */
+    color: #D83F31; /* Red text */
+    border-color: #D83F31;
+}
+.message:empty { display: none; }
+
+@media (max-width: 360px) {
+    header h1 { font-size: 1.4em; }
+    .page-section h2 { font-size: 1.3em; }
+    .nav-btn { font-size: 1.5em; }
+    .auth-form { padding: 20px; }
+}
