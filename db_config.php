@@ -12,10 +12,10 @@ if (DEBUG_MODE) {
 }
 
 // --- IMPORTANT: REPLACE WITH YOUR ACTUAL INFINITYFREE CREDENTIALS ---
-define('DB_SERVER', 'sqlXXX.infinityfree.com');   // Example: sql101.infinityfree.com
-define('DB_USERNAME', 'if0_YOUR_USERNAME');      // Example: if0_12345678
-define('DB_PASSWORD', 'YOUR_IF_PASSWORD');      // Your InfinityFree account password
-define('DB_NAME', 'if0_YOUR_USERNAME_watchclickearn_db'); // Example: if0_12345678_watchclickearn_db
+define('DB_SERVER', 'sql312.infinityfree.com');   // Example: sql101.infinityfree.com
+define('DB_USERNAME', 'if0_39005251');      // Example: if0_12345678
+define('DB_PASSWORD', 'art454500');      // Your InfinityFree account password
+define('DB_NAME', 'if0_39005251_watchclickearn_db'); // Example: if0_12345678_watchclickearn_db
 // --- END OF CRITICAL CREDENTIALS ---
 
 $pdo = null; // Initialize $pdo
