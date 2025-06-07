@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Watch Spin Earn</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Telegram WebApp SDK (optional) -->
+    <!-- <script src="https://telegram.org/js/telegram-web-app.js"></script> -->
+    <!-- Monetag SDK -->
+    <script src='//solseewuthi.net/sdk.js' data-zone='9342950' data-sdk='show_9342950'></script>
+</head>
+<body>
+    <div id="app-container">
+        <div id="loading-overlay" class="hidden">
+            <div class="spinner"></div>
+            <p>Loading...</p>
+        </div>
+
+        <!-- Registration Page -->
+        <div id="registration-page" class="page">
+            <div class="auth-form">
+                <h2>Register</h2>
+                <input type="text" id="reg-username" placeholder="Username" required>
+                <input type="email" id="reg-email" placeholder="Email" required>
+                <input type="password" id="reg-password" placeholder="Password (min 6 chars)" required>
+                <input type="password" id="reg-confirm-password" placeholder="Confirm Password" required>
+                <button id="register-btn">Register</button>
+                <p>Already have an account? <a href="#" id="show-login-link">Login</a></p>
+                <p id="reg-message" class="message"></p>
+            </div>
+        </div>
+
+        <!-- Login Page -->
+        <div id="login-page" class="page hidden">
+            <div class="auth-form">
+                <h2>Login</h2>
+                <input type="email" id="login-email" placeholder="Email" required>
+                <input type="password" id="login-password" placeholder="Password" required>
+                <button id="login-btn">Login</button>
+                <p>Don't have an account? <a href="#" id="show-register-link">Register</a></p>
+                <p id="login-message" class="message"></p>
+            </div>
+        </div>
+
+        <!-- Main App Content (shown after login) -->
+        <div id="main-app" class="hidden">
+            <header>
+                <h1>Watch Spin Earn</h1>
+                <div class="user-info-header">
+                    <span id="header-username">User</span> | Points: <span id="header-points">0</span>
+                </div>
+            </header>
+
+            <main id="main-content">
+                <!-- Profile Section -->
+                <section id="profile-section" class="page-section hidden">
+                    <h2>👤 Profile</h2>
+                    <div class="profile-details">
+                        <p><strong>Username:</strong> <span id="profile-username"></span></p>
+                        <p><strong>Email:</strong> <span id="profile-email"></span></p>
+                        <p><strong>Points:</strong> <span id="profile-points"></span></p>
+                        <p><strong>Referral Code:</strong> <span id="profile-referral-code"></span></p>
+                        <p><strong>Total Referrals Made:</strong> <span id="profile-total-referrals"></span></p>
+                        <p><strong>Daily Limits Last Reset (UTC):</strong> <span id="profile-last-reset"></span></p>
+                    </div>
+                </section>
+
+                <!-- Spin Section -->
+                <section id="spin-section" class="page-section">
+                    <h2>🎰 Spin & Win</h2>
+                    <div class="spin-wheel-container">
+                        <div id="spin-wheel">Spin!</div> <!-- This could be an image or more styled div -->
+                        <p id="spin-result" class="message"></p>
+                    </div>
+                    <div class="spin-info">
+                        <p>Spins Left: <span id="free-spins-left">0</span></p>
+                        <button id="spin-btn">Spin Now</button>
+                    </div>
+                    <div class="spin-info">
+                        <p>Ads for Spins Today: <span id="spin-ads-watched-today">0</span> / <span id="max-spin-ads-today">10</span></p>
+                        <button id="get-spins-ad-btn">Watch Ad (Get 2 Spins)</button>
+                    </div>
+                </section>
+
+                <!-- Task Section -->
+                <section id="task-section" class="page-section hidden">
+                    <h2>📝 Tasks</h2>
+                    <p>Complete daily tasks to earn points. Tasks reset daily (UTC).</p>
+                    <div id="task-list">
+                        <!-- Tasks loaded by JS -->
+                    </div>
+                    <p id="task-message" class="message"></p>
+                </section>
+
+                <!-- Watch Ads Section (for points) -->
+                <section id="ads-section" class="page-section hidden">
+                    <h2>📺 Watch Ads for Points</h2>
+                    <p>Watch ads to earn 20 points each. Limit: <span id="max-ads-limit">38</span> per day (UTC).</p>
+                    <p>Ads Watched Today (for points): <span id="ads-watched-count">0</span></p>
+                    <button id="watch-ad-btn">Watch Ad (Earn 20 Points)</button>
+                    <p id="ad-message" class="message"></p>
+                </section>
+
+                <!-- Referral Section -->
+                <section id="referral-section" class="page-section hidden">
+                    <h2>👥 Referral Program</h2>
+                    <div class="referral-info">
+                        <p>Your Referral Code: <strong id="user-referral-code"></strong></p>
+                        <p>Share this code. You get 20 points, your friend gets 5 points upon using your code.</p>
+                    </div>
+                    <div class="submit-referral">
+                        <h3>Enter Friend's Referral Code</h3>
+                        <input type="text" id="submit-referral-code-input" placeholder="Enter code (e.g., ASTUsername)">
+                        <button id="submit-referral-btn">Submit Code</button>
+                        <p id="referral-submit-message" class="message"></p>
+                    </div>
+                </section>
+
+                <!-- Withdraw Section -->
+                <section id="withdraw-section" class="page-section hidden">
+                    <h2>💸 Withdraw Points</h2>
+                    <p>Your Current Points: <span id="withdraw-current-points">0</span></p>
+                    <form id="withdraw-form">
+                        <div class="form-group">
+                            <label for="withdrawal-amount">Select Amount to Withdraw:</label>
+                            <select id="withdrawal-amount" name="amount">
+                                <!-- Options populated by JS -->
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="withdrawal-method">Payment Method:</label>
+                            <select id="withdrawal-method" name="method">
+                                <option value="TON">TON Wallet</option>
+                                <option value="Binance Pay ID">Binance Pay ID</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="withdrawal-details" id="withdrawal-details-label">TON Wallet Address:</label>
+                            <input type="text" id="withdrawal-details" name="details" placeholder="Enter your address/ID" required>
+                        </div>
+                        <button type="submit" id="request-withdrawal-btn">Request Withdrawal</button>
+                    </form>
+                    <p id="withdraw-message" class="message"></p>
+                </section>
+            </main>
+
+            <nav id="bottom-bar">
+                <button class="nav-btn active" data-section="profile-section" title="Profile">👤</button>
+                <button class="nav-btn" data-section="spin-section" title="Spin">🎰</button>
+                <button class="nav-btn" data-section="task-section" title="Tasks">📝</button>
+                <button class="nav-btn" data-section="ads-section" title="Watch Ads">📺</button>
+                <button class="nav-btn" data-section="referral-section" title="Referrals">👥</button>
+                <button class="nav-btn" data-section="withdraw-section" title="Withdraw">💸</button>
+            </nav>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
